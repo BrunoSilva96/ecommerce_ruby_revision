@@ -1,5 +1,5 @@
 module Authenticable
-  extends ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
   included do
     include DeviseTokenAuth::Concerns::SetUserByToken
