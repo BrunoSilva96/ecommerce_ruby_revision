@@ -67,7 +67,7 @@ shared_examples "paginatable concern" do |factory_name|
   end
 
   context "when records does not fit page size" do
-    let!(:records) { create_list(factory_name, 7) }
+    let!(:records) { create_list(factory_name, 7) } 
 
     context "when :page and :length are empty" do
       it "returns 7 records" do

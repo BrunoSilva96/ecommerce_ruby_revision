@@ -14,4 +14,4 @@ shared_examples "name searchable concern" do |factory_name|
     found_records = described_class.search_by_name(search_param)
     expect(found_records.to_a).to_not include(*records_to_ignore)
   end
-end
+end 
