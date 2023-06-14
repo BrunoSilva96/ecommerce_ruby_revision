@@ -1,19 +1,21 @@
-# require 'rails_helper'
+#  require 'rails_helper'
 
-# RSpec.describe "Admin V1 Users as :admin", type: :request do
-#   let!(:login_user) { create(:user) }
+#  RSpec.describe "Admin V1 Users as :admin", type: :request do
+#    let!(:login_user) { create(:user) }
 
-#   context "GET /users" do
+#    context "GET /users" do
 #     let(:url) { "/admin/v1/users" }
 #     let!(:users) { create_list(:user, 10) }
-
+    
 #     context "without any params" do
 #       it "returns 10 users" do
 #         get url, headers: auth_header(login_user)
-#         expect(body_json['users'].count).to eq 10
-#       end
-
-#       it "returns 10 first Users" do
+#          expect(body_json['users'].count).to eq 10
+#        end
+#      end
+#    end
+#  end
+#        it "returns 10 first Users" do
 #         get url, headers: auth_header(login_user)
 #         expected_users = users[0..9].as_json(
 #           only: %i(id name email profile)
