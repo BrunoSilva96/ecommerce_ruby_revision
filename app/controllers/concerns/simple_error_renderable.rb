@@ -8,5 +8,4 @@ module SimpleErrorRenderable
       render partial: self.class.simple_error_partial, locals: { message: message, fields: fields }, status: status
     end
   end
-
 end
