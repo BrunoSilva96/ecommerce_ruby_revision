@@ -1,5 +1,5 @@
 class Coupon < ApplicationRecord
-  include NameSearchable
+  include LikeSearchable
   include Paginatable
 
   validates :code, presence: true, uniqueness: { case_sensitive: false }
