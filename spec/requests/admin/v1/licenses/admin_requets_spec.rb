@@ -33,7 +33,7 @@ RSpec.describe "Admin V1 Licenses as :admin", type: :request do
     context "with search[key] param" do
       let!(:search_key_licenses) do
         licenses = [] 
-        15.times { |n| licenses << create(:license, key: "SRC #{n + 1}") }
+        15.times { |n| licenses << create(:license, key: "SRC #{n + 1}", game: game) }
         licenses 
       end
 
@@ -111,15 +111,15 @@ RSpec.describe "Admin V1 Licenses as :admin", type: :request do
     context "with valid params" do
       let(:license_params) { { license: attributes_for(:license) }.to_json }
 
-      it 'adds a new Category' do
+      it 'adds a new License' do
         expect do
           post url, headers: auth_header(user), params: license_params
-        end.to change(Category, :count).by(1)
+        end.to change(License, :count).by(1)
       end
 
-      it 'returns last added Category' do
+      it 'returns last added License' do
         post url, headers: auth_header(user), params: license_params
-        expected_license = Category.last.as_json(only: %i(id key platform status game_id))
+        expected_license = License.last.as_json(only: %i(id key platform status game_id))
         expect(body_json['license']).to eq expected_license
       end
 
@@ -134,10 +134,10 @@ RSpec.describe "Admin V1 Licenses as :admin", type: :request do
         { license: attributes_for(:license, key: nil) }.to_json
       end
 
-      it 'does not add a new Category' do
+      it 'does not add a new License' do
         expect do
           post url, headers: auth_header(user), params: license_invalid_params
-        end.to_not change(Category, :count)
+        end.to_not change(License, :count)
       end
 
       it 'returns error message' do
@@ -156,7 +156,7 @@ RSpec.describe "Admin V1 Licenses as :admin", type: :request do
     let(:license) { create(:license) }
     let(:url) { "/admin/v1/licenses/#{license.id}" }
 
-    it "returns requested Category" do
+    it "returns requested License" do
       get url, headers: auth_header(user)
       expected_license = license.as_json(only: %i(id key platform status game_id))
       expect(body_json['license']).to eq expected_license
@@ -176,13 +176,13 @@ RSpec.describe "Admin V1 Licenses as :admin", type: :request do
       let(:new_key) { 'newkey' }
       let(:license_params) { { license: { key: new_key } }.to_json }
 
-      it 'updates Category' do
+      it 'updates License' do
         patch url, headers: auth_header(user), params: license_params
         license.reload
         expect(license.key).to eq new_key
       end
 
-      it 'returns updated Category' do
+      it 'returns updated License' do
         patch url, headers: auth_header(user), params: license_params
         license.reload
         expected_license = license.as_json(only: %i(id key platform status game_id))
@@ -200,7 +200,7 @@ RSpec.describe "Admin V1 Licenses as :admin", type: :request do
         { license: attributes_for(:license, key: nil) }.to_json
       end
 
-      it 'does not update Category' do
+      it 'does not update License' do
         old_key = license.key
         patch url, headers: auth_header(user), params: license_invalid_params
         license.reload
@@ -223,10 +223,10 @@ RSpec.describe "Admin V1 Licenses as :admin", type: :request do
     let!(:license) { create(:license) }
     let(:url) { "/admin/v1/licenses/#{license.id}" }
 
-    it 'removes Category' do
+    it 'removes License' do
       expect do  
         delete url, headers: auth_header(user)
-      end.to change(Category, :count).by(-1)
+      end.to change(License, :count).by(-1)
     end
 
     it 'returns success status' do
