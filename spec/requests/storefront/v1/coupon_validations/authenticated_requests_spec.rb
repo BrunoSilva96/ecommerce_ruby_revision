@@ -5,7 +5,7 @@ RSpec.describe "Storefront V1 Coupon Validation as authenticated user", type: :r
 
   context "POST /coupons/:coupon_code/validations" do
     context "with valid coupon" do
-      let(:coupon) { create(:coupon) }
+      let!(:coupon) { create(:coupon) }
       let(:url) { "/storefront/v1/coupons/#{coupon.code}/validations" }
 
       it 'returns success status' do
