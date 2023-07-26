@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :categories, only: :index
       post "/coupons/:coupon_code/validations", to: "coupon_validations#create"
       resources :wish_items, only: [:index, :create, :destroy]
+      resources :checkouts, only: :create
     end
   end
 end

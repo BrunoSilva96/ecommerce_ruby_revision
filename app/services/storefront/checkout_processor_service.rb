@@ -1,5 +1,7 @@
 module Storefront
   class CheckoutProcessorService
+    class InvalidParamsError < StandardError; end
+
     attr_reader :errors, :order
 
     def initialize(params)
